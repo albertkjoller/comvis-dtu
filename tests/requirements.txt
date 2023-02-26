@@ -1,0 +1,6 @@
+# Install package
+-e .
+
+# Test modules
+pytest
+coverage

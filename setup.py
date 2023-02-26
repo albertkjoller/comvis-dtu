@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -15,6 +15,6 @@ setup(
     author="Albert Kjøller Jacobsen",
     author_email="s194253@student.dtu.dk",
     url="https://github.com/albertkjoller/comvis-dtu",
-    packages=["comvis"],
+    packages=find_packages(),  # ["comvis"],
     install_requires=required_packages,
 )
