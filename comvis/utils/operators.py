@@ -5,7 +5,8 @@ import numpy as np
 
 def CrossOp(p: np.ndarray) -> np.ndarray:
     """
-    Implements the cross-operator - a matrix form of a 2-dimensional vector in homogeneous coordinates such that the cross-product to another matrix/vector can be computed as a dot-product.
+    Implements the cross-operator - a matrix form of a 2-dimensional vector in homogeneous coordinates
+    such that the cross-product to another matrix/vector can be computed as a dot-product.
 
     Args:
         p (np.ndarray): (3, 1)-dimensional vector of a 2D-point given in homogeneous coordinates.
