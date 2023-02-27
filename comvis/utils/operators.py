@@ -22,3 +22,9 @@ def CrossOp(p: np.ndarray) -> np.ndarray:
             [-p[1], p[0], 0],
         ]
     )
+
+
+def Rotation():
+    # Not sure if this should be implemented or if
+    # scipy.spatial.transform.Rotation should just be used.
+    pass
