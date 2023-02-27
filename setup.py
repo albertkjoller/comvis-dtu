@@ -9,7 +9,7 @@ with open("requirements.txt", "r") as f:
 
 setup(
     name="comvis-dtu",
-    version="0.2",
+    version="0.3",
     description="A module gathering functionalities from the course 02504 Comuter Vision @ DTU (Spring 2023)",
     license="MIT",
     long_description=long_description,
