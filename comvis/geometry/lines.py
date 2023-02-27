@@ -13,7 +13,7 @@ def compute_signed_dist(line: np.ndarray, points: np.ndarray) -> float:
         float: (N,)-dimensional array of distances between input points and the normalized line.
     """
 
-    line_dist_from_origo = round((l[:-1] ** 2).sum(), 2)
+    line_dist_from_origo = round((line[:-1] ** 2).sum(), 2)
 
     # Line tangent to unit circle?
     if line_dist_from_origo != 1.0:
