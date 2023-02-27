@@ -1,9 +1,13 @@
 # 👁️ Computer Vision 👁️
 The package contains functionalities for the course 02504 - Computer Vision (Spring 2023) @ DTU
 
+## Installation
+
+You can directly install the package using `pip` by running:
+`pip install git+https://github.com/albertkjoller/comvis-dtu.git`
+
 
 ## Development setup
-
 ### Environment
 
 Create a conda environment, e.g. like below with Python 3.10:
