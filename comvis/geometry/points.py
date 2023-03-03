@@ -1,5 +1,8 @@
 import numpy as np
+import scipy
 import itertools as it
+
+from typing import List
 
 
 def box3d(n: int = 16) -> np.ndarray:
@@ -48,3 +51,31 @@ def triangulate(pixel_coords, projection_matrices):
 
     # Extract last row of V and normalize to get X
     return V[-1][:4] / V[-1][3]
+
+
+def triangulate_nonlin(
+    pixel_coords: List[np.ndarray], projection_matrices: List[np.ndarray]
+) -> np.ndarray:
+    """
+    Triangulation using non-linear optimziation (squared error).
+
+    Args:
+        pixel_coords (list): A list of tuples representing pixel coordinates of the point in each image. Each tuple should contain two values: the x-coordinate and the y-coordinate.
+        projection_matrices (list): A list of 3x4 projection matrices for each image. Each projection matrix should be a numpy array of shape (3, 4).
+
+    Returns:
+        numpy.ndarray: A numpy array of shape (4,) representing the 3D point in homogeneous coordinates.
+    """
+
+    def compute_residuals(Q: np.ndarray) -> np.ndarray:
+        Q = Q.reshape(-1, 1)
+        return np.vstack(
+            [
+                Pi(projection_matrices[i] @ Q) - pixel_coords[i]
+                for i in range(len(pixel_coords))
+            ]
+        ).flatten()
+
+    x0 = triangulate(pixel_coords=pixel_coords, projection_matrices=projection_matrices)
+    res = scipy.optimize.least_squares(compute_residuals, x0)
+    return res.x
