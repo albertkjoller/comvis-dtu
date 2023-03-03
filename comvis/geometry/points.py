@@ -80,3 +80,18 @@ def triangulate_nonlin(
     x0 = triangulate(pixel_coords=pixel_coords, projection_matrices=projection_matrices)
     res = scipy.optimize.least_squares(compute_residuals, x0)
     return res.x
+
+
+def checkerboard_points(n, m):
+    """
+    Returns checkerboard points aranged in a nxm matrix.
+
+    Args:
+        n (int): rows
+        m (int): columns
+
+    Returns:
+        np.array: checkerboard points
+    """
+    Q = [[i - (n-1)/2, j - (m-1)/2, 0] for i, j in it.product(range(n), range(m))]
+    return np.vstack(Q).T
