@@ -33,6 +33,22 @@ def camera_matrix(
     )
 
 
+def get_projection_matrix(K: np.ndarray, R: np.ndarray, t: np.ndarray) -> np.ndarray:
+    """
+    Computes the projection matrix.
+
+    Args:
+        K (np.ndarray): Camera matrix. Shape = (3, 3)
+        R (np.ndarray): Rotation matrix. Shape = (3, 3)
+        t (np.ndarray): Translation vector. Shape = (3, 1)
+
+    Returns:
+        np.ndarray: The projection matrix
+    """
+    Rt = np.hstack([R, t.reshape(-1, 1)])  # shape = (3, 4)
+    return K @ Rt
+
+
 def projectpoints(
     K: np.ndarray,
     R: np.ndarray,

@@ -4,3 +4,4 @@
 # Test modules
 pytest
 coverage
+scipy
