@@ -26,11 +26,11 @@ def triangulate(pixel_coords, projection_matrices):
     Author: ChatGPT
 
     Args:
-        pixel_coords (_type_): _description_
-        projection_matrices (_type_): _description_
+        pixel_coords (list): A list of tuples representing pixel coordinates of the point in each image. Each tuple should contain two values: the x-coordinate and the y-coordinate.
+        projection_matrices (list): A list of 3x4 projection matrices for each image. Each projection matrix should be a numpy array of shape (3, 4).
 
     Returns:
-        _type_: _description_
+        numpy.ndarray: A numpy array of shape (4,) representing the 3D point in homogeneous coordinates.
     """
 
     n = len(pixel_coords)
