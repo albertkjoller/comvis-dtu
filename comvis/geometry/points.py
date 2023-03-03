@@ -18,3 +18,33 @@ def box3d(n: int = 16) -> np.ndarray:
         points.extend(set(it.permutations([(i,) * n, (j,) * n, N])))
 
     return np.hstack(points) / 2
+
+
+def triangulate(pixel_coords, projection_matrices):
+    """_summary_
+
+    Author: ChatGPT
+
+    Args:
+        pixel_coords (_type_): _description_
+        projection_matrices (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
+    n = len(pixel_coords)
+    B = np.zeros((2 * n, 4))
+
+    for i in range(n):
+        P = projection_matrices[i]
+        x, y = pixel_coords[i]
+        # See slide 27 for def.
+        B[2 * i] = x * P[2] - P[0]  # First row of block i in B
+        B[2 * i + 1] = y * P[2] - P[1]  # Second row of block i in B
+
+    # Solve the linear system Bx=0 using SVD (where x is the 3D point in homogeneous coordinates)
+    _, _, V = np.linalg.svd(B)
+
+    # Extract last row of V and normalize to get X
+    return V[-1][:4] / V[-1][3]
