@@ -4,10 +4,16 @@ The package contains functionalities for the course 02504 - Computer Vision (Spr
 ## Installation
 
 You can directly install the package using `pip` by running:
+
+Either in editable mode:
+```
+pip install -e git+https://github.com/albertkjoller/comvis-dtu.git#egg=comvis-dtu
+```
+
+or in deployment mode:
 ```
 pip install git+https://github.com/albertkjoller/comvis-dtu.git
 ```
-
 
 ## Development setup
 ### Environment
