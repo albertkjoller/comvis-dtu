@@ -4,7 +4,7 @@ from ..utils.coordinates import Pi, PiInv, normalize2d
 from ..utils.operators import CrossOp
 
 
-def hest(q1: np.ndarray, q2: np.ndarray, normalize: bool = True) -> np.ndarray:
+def hest(q1: np.ndarray, q2: np.ndarray, normalize: bool = False) -> np.ndarray:
     """
     Estimates the homography from points obtained from two different images.
     Input is homogeneous 2D-coordinates given in each of the cameras image planes.
