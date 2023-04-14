@@ -214,8 +214,8 @@ def Fest_RANSAC(matches, kp1, kp2, sigma, n_iter=200, seed=0):
 
         if consensus > max_num_inliers:
             max_num_inliers = consensus
-            inliers = inliers
+            bestInliers = inliers
 
-    best_Fest = Fest_8point(p1[:, inliers], p2[:, inliers])
+    best_Fest = Fest_8point(p1[:, bestInliers], p2[:, bestInliers])
 
-    return best_Fest, inliers, p1, p2
+    return best_Fest, bestInliers, p1, p2
