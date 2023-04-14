@@ -76,7 +76,7 @@ def Fest_8point(q1: np.ndarray, q2: np.ndarray) -> np.ndarray:
 
 
 def estHomographyRANSAC(kp1, des1, kp2, des2, seed=0):
-    
+
     np.random.seed(seed)
 
     matcher = cv2.BFMatcher_create(crossCheck=True)
