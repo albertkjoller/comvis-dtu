@@ -95,3 +95,24 @@ def checkerboard_points(n, m):
     """
     Q = [[i - (n-1)/2, j - (m-1)/2, 0] for i, j in it.product(range(n), range(m))]
     return np.vstack(Q).T
+
+
+def SampsonsDistance(Fest: np.ndarray, p1: np.ndarray, p2: np.ndarray):
+    """_summary_
+
+    Args:
+        Fest (np.ndarray): Estimated fundamental matrix
+        p1 (np.ndarray): (2+1, 1) point from one image given in homogeneous coordinates.
+        p2 (np.ndarray): Corresponding (2+1, 1) point from another image given in homogeneous coordinates.
+    """
+    q1, q2 = p1, p2
+
+    q2_Fest         = (q2.reshape(1, -1) @ Fest).reshape(-1, 1)
+    # q2_Fest         = PiInv(Pi(q2_Fest))
+    Fest_q1         = (Fest @ q1.reshape(-1, 1)).reshape(-1, 1)
+    # Fest_q1         = PiInv(Pi(Fest_q1))
+
+    numerator       = (q2.reshape(1, -1) @ Fest @ q1.reshape(-1, 1))**2
+    denominator     = q2_Fest[0]**2 + q2_Fest[1]**2 + Fest_q1[0]**2 + Fest_q1[1]**2
+
+    return numerator / denominator
