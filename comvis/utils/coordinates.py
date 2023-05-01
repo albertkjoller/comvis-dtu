@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def Pi(ph: np.ndarray) -> np.ndarray:
+def Pi(ph: np.ndarray | list) -> np.ndarray:
     """
     Maps from homogeneous coordinates to inhomogeneous coordinates
     by dividing the coordinates with the scaling factor.
@@ -16,10 +16,15 @@ def Pi(ph: np.ndarray) -> np.ndarray:
         np.ndarray:
             (D, N)-dimensional coordinates, now given in inhomogeneous coordinates.
     """
-    return ph[:-1] / ph[-1]
+    if isinstance(ph, np.ndarray):
+        if ph.ndim < 2:
+            return AttributeError(f"Input must be at least 2-dimensional. but was {ph.ndim} consider reshaping the input. ph = ph.reshape(-1, 1)")
+        return ph[:-1]/ph[-1]
+    elif isinstance(ph, list):
+        return [Pi(np.array(p)) for p in ph]
 
 
-def PiInv(p: np.ndarray) -> np.ndarray:
+def PiInv(p: np.ndarray | list) -> np.ndarray:
     """
     Maps from inhomogeneous coordinates to homogeneous coordinates
     by adding an extra dimension with a scaling factor of 1.
@@ -34,8 +39,11 @@ def PiInv(p: np.ndarray) -> np.ndarray:
         np.ndarray:
             (D+1, N)-dimensional coordinates, now given in homogeneous coordinates.
     """
-    _, N = p.shape
-    return np.vstack([p, np.ones(N)])
+    if isinstance(p, np.ndarray):
+        _, N = p.shape
+        return np.vstack([p, np.ones(N)])
+    elif isinstance(p, list):
+        return [PiInv(np.array(p_)) for p_ in p]
 
 
 def normalize2d(points: np.ndarray) -> np.ndarray:
