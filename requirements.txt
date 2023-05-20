@@ -1,3 +1,8 @@
 # Essential packages
 numpy
 opencv-python
+tqdm
+matplotlib
+scipy
+scikit-image
+open3d
