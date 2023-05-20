@@ -21,8 +21,8 @@ def hest(q1: np.ndarray, q2: np.ndarray, normalize: bool = False) -> np.ndarray:
     """
     if normalize:
         # Get normalization matrices and normalize points)
-        T1, T2 = normalize2d(q1), normalize2d(q2)
-        q1, q2 = Pi(T1 @ PiInv(q1)), Pi(T2 @ PiInv(q2))
+        T1, T2 = normalize2d(Pi(q1)), normalize2d(Pi(q2))
+        q1, q2 = T1 @ q1, T2 @ q2
 
     # Setup B-matrix
     B = np.vstack(

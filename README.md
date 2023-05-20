@@ -1,6 +1,8 @@
 # 👁️ Computer Vision 👁️
 The package contains functionalities for the course 02504 - Computer Vision (Spring 2023) @ DTU
 
+A cheatsheet containing examples of the usage of functions (and solutions to specific exercises) is included in the root, both as a notebook and as a searchable HTML file. Be aware that file paths are relative to the system on which the cheatsheet was created - it should be fairly easy to insert your own paths, though.
+
 ## Installation
 
 You can directly install the package using `pip` by running:

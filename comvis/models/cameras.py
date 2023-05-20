@@ -55,6 +55,7 @@ def projectpoints(
     t: np.ndarray,
     Q: np.ndarray,
     distCoeffs: Optional[Union[List[float], np.ndarray]] = None,
+    return_projection_matrix = False,
 ) -> np.ndarray:
     """
     Projects 3D inhomogeneous points to the image plane based on the setting
@@ -82,4 +83,8 @@ def projectpoints(
 
     # Project points to image plane (in inhomogeneous coordinates)
     Qh = K @ Rt @ Ph
-    return Pi(Qh)
+
+    if return_projection_matrix:
+        return Pi(Qh), K @ Rt
+    else:
+        return Pi(Qh)

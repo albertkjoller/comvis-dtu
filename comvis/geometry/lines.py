@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from typing import Union
+from typing import Union, Optional
 from tqdm import tqdm
 
 from ..geometry.points import SampsonsDistance
 from ..geometry.planes import Fest_8point
-
+from ..utils.coordinates import Pi, PiInv
 
 def compute_signed_dist(line: np.ndarray, points: np.ndarray) -> float:
     """
@@ -125,7 +125,7 @@ def RANSAC(points: np.ndarray, threshold: Union[float, int], n_iter: int = 5, dr
 
     # Adaptive running lenght
     N_hat = np.inf
-    M = len(points)
+    M = points.shape[1]
 
     while n < N_hat:
         selected_points = drawNpoints(points, draw_n_points)
@@ -140,7 +140,7 @@ def RANSAC(points: np.ndarray, threshold: Union[float, int], n_iter: int = 5, dr
             inliers = inlier_detection(line_, points, threshold=threshold)
 
             # Check for convergence-ish
-            s = calculate_consensus(l, points=points, threshold=threshold)
+            s = calculate_consensus(line_, points=points, threshold=threshold)
             eps_hat = 1 - s/M
             N_hat = calc_N_hat(p, eps_hat, 2)
 
@@ -161,7 +161,18 @@ def RANSAC(points: np.ndarray, threshold: Union[float, int], n_iter: int = 5, dr
     print(f"Number of outliers: {points.shape[1] - max_num_inliers}")
     print(f"Threshold value: {threshold}")
 
-    return best_line, estimated_line, inliers
+    return best_line, estimated_line, inliers, n
+
+def draw_line(line, threshold: Optional[Union[float, int]] = None, color='k', ls='solid', width=2, ylim=(-5,5), xlim=(-5,5), label=''):
+  xlist, ylist = np.linspace(xlim[0], xlim[1], 500), np.linspace(ylim[0], ylim[1], 150)
+  X,Y = np.meshgrid(xlist, ylist)
+  values = line[0]*X + line[1]*Y + line[2]
+  plt.contour(X, Y, values, [0], colors = color, linestyles = ls, linewidths=[width])
+
+  if threshold is not None:
+    raise NotImplementedError("But please do!")
+    #plt.contour(X, Y, values + threshold, [0], colors = 'green', linestyles = ls, linewidths=[width])
+    #plt.contour(X, Y, values - threshold, [0], colors = 'green', linestyles = ls, linewidths=[width])
 
 
 
