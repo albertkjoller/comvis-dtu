@@ -46,5 +46,6 @@ jobs:
 
     - name: Generate Report
       run: |
+        coverage html -i
         coverage run -m pytest -v
         coverage report
