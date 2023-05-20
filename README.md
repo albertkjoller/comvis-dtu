@@ -1,5 +1,6 @@
 # 👁️ Computer Vision 👁️
-The package contains functionalities for the course 02504 - Computer Vision (Spring 2023) @ DTU
+The package contains functionalities for the course 02504 - Computer Vision (Spring 2023) @ DTU.
+If you like what you see, give it a star! ⭐
 
 A cheatsheet containing examples of the usage of functions (and solutions to specific exercises) is included in the root, both as a notebook and as a searchable HTML file. Be aware that file paths are relative to the system on which the cheatsheet was created - it should be fairly easy to insert your own paths, though.
 
