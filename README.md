@@ -18,6 +18,13 @@ or in deployment mode:
 pip install git+https://github.com/albertkjoller/comvis-dtu.git
 ```
 
+## Use
+
+The package contains multiple functions that were implemented during the course. An example is the `Pi` and `PiInv` functions that can be imported by running:
+```
+from comvis import Pi, PiInv
+```
+
 ## Development setup
 ### Environment
 
